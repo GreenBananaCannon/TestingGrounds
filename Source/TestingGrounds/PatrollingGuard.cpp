@@ -2,3 +2,7 @@
 
 #include "PatrollingGuard.h"
 
+TArray<AActor*> APatrollingGuard::getPatrolPoints() const
+{
+	return PatrolPointsCPP;
+}
