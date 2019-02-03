@@ -7,6 +7,7 @@
 #include "FirstPersonCharacter.generated.h"
 
 class UInputComponent;
+class AGun;
 
 UCLASS(config=Game)
 class AFirstPersonCharacter : public ACharacter
@@ -80,10 +81,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	uint32 bUsingMotionControllers : 1;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	TSubclassOf<AGun> GunBlueprint;
+
+private:
+	AGun* Gun;
+
 protected:
-	
+
 	/** Fires a projectile. */
-	void OnFire();
+	//void OnFire();
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
