@@ -45,11 +45,13 @@ void AMannequin::BeginPlay()
 		);
 	Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	Gun->AnimInstance = Mesh1P->GetAnimInstance();
-	if (!ensure(InputComponent)) { return; }
-	InputComponent->BindAction("Fire", IE_Pressed, Gun, &AGun::OnFire);
+	if (InputComponent != NULL)
+	{
+		InputComponent->BindAction("Fire", IE_Pressed, this, &AMannequin::PullTrigger);
+	}
 }
 
-void AMannequin::Fire()
+void AMannequin::PullTrigger()
 {
 	Gun->OnFire();
 }
@@ -63,7 +65,7 @@ void AMannequin::Tick(float DeltaTime)
 
 // Called to bind functionality to input
 void AMannequin::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
+{  
 	check(PlayerInputComponent);
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	// set up gameplay key bindings

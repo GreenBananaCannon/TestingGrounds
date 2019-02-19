@@ -27,7 +27,7 @@ public:
 	TSubclassOf<AGun> GunBlueprint;
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	void Fire();
+	void PullTrigger();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
