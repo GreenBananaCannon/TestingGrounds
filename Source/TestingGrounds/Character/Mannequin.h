@@ -29,6 +29,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	void PullTrigger();
 
+	virtual void UnPossessed() override;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

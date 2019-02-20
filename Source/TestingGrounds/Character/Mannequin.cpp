@@ -43,8 +43,18 @@ void AMannequin::BeginPlay()
 		Mesh1P->GetSocketLocation(FName("GripPoint")),
 		Mesh1P->GetSocketRotation(FName("GripPoint"))
 		);
-	Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-	Gun->AnimInstance = GetMesh()->GetAnimInstance();
+
+	if (IsPlayerControlled()) // attach depending on who is controlling the pawns
+	{
+		Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	}
+	else
+	{
+		Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	}
+	Gun->AnimInstance1P = Mesh1P->GetAnimInstance();
+	Gun->AnimInstance3P = GetMesh()->GetAnimInstance();
+
 	if (InputComponent != NULL)
 	{
 		InputComponent->BindAction("Fire", IE_Pressed, this, &AMannequin::PullTrigger);
@@ -56,11 +66,17 @@ void AMannequin::PullTrigger()
 	Gun->OnFire();
 }
 
+void AMannequin::UnPossessed()
+{
+	Super::UnPossessed();
+	if (!ensure(Gun)) { return;  }
+	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+}
+
 // Called every frame
 void AMannequin::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
