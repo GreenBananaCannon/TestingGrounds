@@ -36,7 +36,7 @@ void ATile::BeginPlay()
 {
 	Super::BeginPlay();
 	CastSphere(GetActorLocation(), 300.0f);
-	CastSphere(GetActorLocation() + FVector(0,0,500), 300.0f);
+	CastSphere(GetActorLocation() + FVector(0,0,1000), 300.0f);
 	
 }
 
@@ -55,10 +55,10 @@ bool ATile::CastSphere(FVector Location, float Radius)
 		Location,
 		Location,
 		FQuat::Identity,
-		ECollisionChannel::ECC_Camera,
+		ECollisionChannel::ECC_GameTraceChannel2,
 		FCollisionShape::MakeSphere(Radius));
 	FColor ResultColor = HasHit ? FColor::Red : FColor::Green;
-	DrawDebugSphere(GetWorld(), Location, Radius, 24, ResultColor, true, 100.0f, (uint8)'\000', 5);
+	DrawDebugCapsule(GetWorld(), Location, 0, Radius, FQuat::Identity, ResultColor, true, 100.0f); //capsule gets the trace accross with less lines than sphere
 	return HasHit;
 }
 
