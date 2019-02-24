@@ -22,4 +22,8 @@ public:
 
 	void Add(AActor* ActorToAdd);
 
+private:
+
+	TArray<AActor*> NavPool;
+
 };

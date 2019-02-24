@@ -1,6 +1,7 @@
 // //Copyright Adam Tabis
 
 #include "ActorPool.h"
+#include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
 UActorPool::UActorPool()
@@ -12,17 +13,32 @@ UActorPool::UActorPool()
 	// ...
 }
 
-AActor * UActorPool::Checkout()
+AActor* UActorPool::Checkout()
 {
-	return nullptr;
+	AActor* ActorToCheckout = nullptr;
+	if (NavPool.Num() > 0)
+	{
+		ActorToCheckout = NavPool.Pop(true);
+		UE_LOG(LogTemp, Warning, TEXT("[%s] Checked out %s"), *GetName(), *ActorToCheckout->GetName());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Actor Pool is empty"));
+	}
+	
+	if (!ensure(ActorToCheckout)) { return nullptr; }
+	return ActorToCheckout;
 }
 
-void UActorPool::Return(AActor * ActorToReturn)
+void UActorPool::Return(AActor* ActorToReturn)
 {
-
+	if (!ensure(ActorToReturn)) { return; }
+	UE_LOG(LogTemp, Warning, TEXT("[%s] Returning Actor %s "), *GetName(), *ActorToReturn->GetName());
+	NavPool.Add(ActorToReturn);
 }
 
-void UActorPool::Add(AActor * ActorToAdd)
+void UActorPool::Add(AActor* ActorToAdd)
 {
-
+	if (!ensure(ActorToAdd)) { return; }
+	NavPool.Add(ActorToAdd);
 }

@@ -28,18 +28,24 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
 	
+	void PositionNavMeshBoundsVolume();
+
 	bool CanSpawnAtLocation(FVector Location, float Radius);
 
-	bool FindEmptyLocation(FVector &OutLocation,float Radius);
+	bool FindEmptyLocation(FVector& OutLocation,float Radius);
 	
 	void PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint, float Rotation, float Scale);
 
 	UActorPool* Pool;
+
+	AActor* NavMeshBoundsVolume;
 
 };
