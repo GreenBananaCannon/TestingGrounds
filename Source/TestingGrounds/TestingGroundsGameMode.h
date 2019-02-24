@@ -13,6 +13,8 @@ class ATestingGroundsGameMode : public AGameModeBase
 
 public:
 	ATestingGroundsGameMode();
+
+
 };
 
 

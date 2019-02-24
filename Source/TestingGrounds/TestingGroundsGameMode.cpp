@@ -5,8 +5,7 @@
 #include "Player/FirstPersonCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
-ATestingGroundsGameMode::ATestingGroundsGameMode()
-	: Super()
+ATestingGroundsGameMode::ATestingGroundsGameMode() : Super()
 {
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/Dynamic/Character/Behavior/BP_Character"));
@@ -15,3 +14,5 @@ ATestingGroundsGameMode::ATestingGroundsGameMode()
 	// use our custom HUD class
 	HUDClass = ATestingGroundsHUD::StaticClass();
 }
+
+
