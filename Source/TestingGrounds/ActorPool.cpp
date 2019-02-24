@@ -15,19 +15,13 @@ UActorPool::UActorPool()
 
 AActor* UActorPool::Checkout()
 {
-	AActor* ActorToCheckout = nullptr;
-	if (NavPool.Num() > 0)
-	{
-		ActorToCheckout = NavPool.Pop(true);
-		UE_LOG(LogTemp, Warning, TEXT("[%s] Checked out %s"), *GetName(), *ActorToCheckout->GetName());
-	}
-	else
+	UE_LOG(LogTemp, Warning, TEXT("NavPool size before Checkout occurs: %d"), NavPool.Num());
+	if (NavPool.Num() == 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Actor Pool is empty"));
+		return nullptr;
 	}
-	
-	if (!ensure(ActorToCheckout)) { return nullptr; }
-	return ActorToCheckout;
+	return NavPool.Pop();;
 }
 
 void UActorPool::Return(AActor* ActorToReturn)
@@ -40,5 +34,5 @@ void UActorPool::Return(AActor* ActorToReturn)
 void UActorPool::Add(AActor* ActorToAdd)
 {
 	if (!ensure(ActorToAdd)) { return; }
-	NavPool.Add(ActorToAdd);
+	NavPool.Push(ActorToAdd);
 }
