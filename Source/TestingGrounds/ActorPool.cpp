@@ -15,24 +15,23 @@ UActorPool::UActorPool()
 
 AActor* UActorPool::Checkout()
 {
-	UE_LOG(LogTemp, Warning, TEXT("NavPool size before Checkout occurs: %d"), NavPool.Num());
-	if (NavPool.Num() == 0)
+	if (Pool.Num() == 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Actor Pool is empty"));
 		return nullptr;
 	}
-	return NavPool.Pop();;
+	return Pool.Pop();
 }
 
 void UActorPool::Return(AActor* ActorToReturn)
 {
 	if (!ensure(ActorToReturn)) { return; }
 	UE_LOG(LogTemp, Warning, TEXT("[%s] Returning Actor %s "), *GetName(), *ActorToReturn->GetName());
-	NavPool.Add(ActorToReturn);
+	Pool.Add(ActorToReturn);
 }
 
 void UActorPool::Add(AActor* ActorToAdd)
 {
 	if (!ensure(ActorToAdd)) { return; }
-	NavPool.Push(ActorToAdd);
+	Pool.Push(ActorToAdd);
 }

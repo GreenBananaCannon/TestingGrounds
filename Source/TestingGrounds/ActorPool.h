@@ -24,6 +24,6 @@ public:
 
 private:
 
-	TArray<AActor*> NavPool;
+	TArray<AActor*> Pool;
 
 };
