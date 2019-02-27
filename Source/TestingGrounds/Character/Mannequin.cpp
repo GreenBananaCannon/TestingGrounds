@@ -28,7 +28,6 @@ AMannequin::AMannequin()
 	Mesh1P->CastShadow = false;
 	Mesh1P->RelativeRotation = FRotator(1.9f, -19.19f, 5.2f);
 	Mesh1P->RelativeLocation = FVector(-0.5f, -4.4f, -155.7f);
-
 }
 
 // Called when the game starts or when spawned
