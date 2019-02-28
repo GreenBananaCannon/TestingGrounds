@@ -75,4 +75,6 @@ private:
 
 	AActor* NavMeshBoundsVolume;
 
+	void DestroyProps();
+
 };

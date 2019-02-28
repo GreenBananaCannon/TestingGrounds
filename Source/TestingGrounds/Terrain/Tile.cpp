@@ -109,6 +109,24 @@ bool ATile::FindEmptyLocation(FVector& OutLocation, float Radius)
 	return false;
 }
 
+void ATile::DestroyProps()
+{
+	TArray<AActor*> ChildActors;
+	this->GetAttachedActors(ChildActors);
+
+	for (auto child : ChildActors)
+	{
+		if (child) {
+			UE_LOG(LogTemp, Warning, TEXT("[%s] has child actor {%s}."), *GetName(), *child->GetName());
+			child->Destroy();
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[%s] has child actor not found."), *GetName());
+		}
+	}
+}
+
 // Called when the game starts or when spawned
 void ATile::BeginPlay()
 {
@@ -119,6 +137,9 @@ void ATile::BeginPlay()
 void ATile::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
+
+	DestroyProps();
+
 	if (NavMeshBoundsVolume == nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("[%s] atttempting to return null nav volume."), *GetName());
