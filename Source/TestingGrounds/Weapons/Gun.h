@@ -23,7 +23,7 @@ public:
 	// Sets default values for this actor's properties
 	AGun();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Ammo")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Ammo")
 	int32 Ammo = 100;
 
 	/** Projectile class to spawn */

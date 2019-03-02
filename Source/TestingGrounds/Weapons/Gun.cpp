@@ -41,7 +41,7 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::OnFire()
 {
-	if (Ammo <= 0)
+	if (Ammo <= 0) //only fire if we have ammo
 	{
 		return;
 	}
@@ -62,6 +62,7 @@ void AGun::OnFire()
 
 				// spawn the projectile at the muzzle
 				World->SpawnActor<ABallProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+				--Ammo;
 		}
 	}
 
