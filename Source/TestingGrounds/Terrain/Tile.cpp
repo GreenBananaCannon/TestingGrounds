@@ -7,7 +7,6 @@
 #include "ActorPool.h"
 #include "NavigationSystem.h"
 
-
 // Sets default values
 ATile::ATile()
 {
@@ -117,7 +116,6 @@ void ATile::DestroyProps()
 	for (auto child : ChildActors)
 	{
 		if (child) {
-			UE_LOG(LogTemp, Warning, TEXT("[%s] has child actor {%s}."), *GetName(), *child->GetName());
 			child->Destroy();
 		}
 		else

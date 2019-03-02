@@ -60,6 +60,12 @@ void AMannequin::BeginPlay()
 	}
 }
 
+void AMannequin::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	Gun->Destroy();
+}
+
 void AMannequin::PullTrigger()
 {
 	Gun->OnFire();
