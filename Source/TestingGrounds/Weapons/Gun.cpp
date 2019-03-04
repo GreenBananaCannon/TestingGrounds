@@ -3,6 +3,7 @@
 #include "Gun.h"
 #include "Kismet/GameplayStatics.h"
 #include "Animation/AnimInstance.h"
+#include "Perception/AISense_Hearing.h"
 #include "BallProjectile.h"
 
 // Sets default values
@@ -76,7 +77,7 @@ void AGun::OnFire()
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
 	}
-
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(),100.0f);
 	// try and play a firing animation if specified
 	if (FireAnimation1P != NULL && AnimInstance1P != NULL)
 	{

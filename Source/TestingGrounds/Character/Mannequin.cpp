@@ -88,7 +88,7 @@ void AMannequin::UnPossessed()
 	Super::UnPossessed();
 	if (!ensure(Gun)) { return;  }
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision); //prevent invisible 1P models from causing collisions
 }
 
 // Called every frame
