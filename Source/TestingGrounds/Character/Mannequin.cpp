@@ -6,6 +6,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Weapons/Gun.h"
 #include "Weapons/BallProjectile.h"
+#include "GameplayTags/Classes/GameplayTagContainer.h"
 #include "Components/InputComponent.h"
 
 // Sets default values
@@ -35,20 +36,30 @@ void AMannequin::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
-	if (!ensure(GunBlueprint)) { return; }
-	Gun = GetWorld()->SpawnActor<AGun>(
-		GunBlueprint,
-		Mesh1P->GetSocketLocation(FName("GripPoint")),
-		Mesh1P->GetSocketRotation(FName("GripPoint"))
-		);
-
 	if (IsPlayerControlled()) // attach depending on who is controlling the pawns
 	{
+		//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
+		if (!ensure(GunBlueprint)) { return; }
+		Gun = GetWorld()->SpawnActor<AGun>(
+			GunBlueprint,
+			Mesh1P->GetSocketLocation(FName("GripPoint")),
+			Mesh1P->GetSocketRotation(FName("GripPoint"))
+			);
 		Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	}
 	else
 	{
+		//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
+	
+		FActorSpawnParameters SpawnParams = FActorSpawnParameters();
+		SpawnParams.Name = FName("NPCGun", GetUniqueID());
+		if (!ensure(GunBlueprint)) { return; }
+		Gun = GetWorld()->SpawnActor<AGun>(
+			GunBlueprint,
+			Mesh1P->GetSocketLocation(FName("GripPoint")),
+			Mesh1P->GetSocketRotation(FName("GripPoint")),
+			SpawnParams
+			);
 		Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	}
 
@@ -77,6 +88,7 @@ void AMannequin::UnPossessed()
 	Super::UnPossessed();
 	if (!ensure(Gun)) { return;  }
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 }
 
 // Called every frame

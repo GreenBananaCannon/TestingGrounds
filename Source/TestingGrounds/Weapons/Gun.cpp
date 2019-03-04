@@ -29,7 +29,12 @@ AGun::AGun()
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (GetName().Contains("NPCGun"))
+	{
+		Ammo = 1000;
+	}
+
 }
 
 // Called every frame
