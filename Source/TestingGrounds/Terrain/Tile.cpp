@@ -170,5 +170,3 @@ bool ATile::CanSpawnAtLocation(FVector Location, float Radius)
 	//DrawDebugCapsule(GetWorld(), GlobalLocation, 0, Radius, FQuat::Identity, ResultColor, true, 100.0f); //capsule gets the trace accross with less lines than sphere
 	return !HasHit;
 }
-
-

@@ -50,7 +50,6 @@ void AMannequin::BeginPlay()
 	else
 	{
 		//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
-	
 		FActorSpawnParameters SpawnParams = FActorSpawnParameters();
 		SpawnParams.Name = FName("NPCGun", GetUniqueID());
 		if (!ensure(GunBlueprint)) { return; }

@@ -76,8 +76,9 @@ void AGun::OnFire()
 	if (FireSound != NULL)
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
+		UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), 100.0f);
 	}
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(),100.0f);
+	
 	// try and play a firing animation if specified
 	if (FireAnimation1P != NULL && AnimInstance1P != NULL)
 	{
@@ -87,4 +88,9 @@ void AGun::OnFire()
 	{
 		AnimInstance3P->Montage_Play(FireAnimation3P, 1.f);
 	}
+}
+
+void AGun::IncreaseAmmo(int32 AmmoToAdd)
+{
+	Ammo += AmmoToAdd;
 }

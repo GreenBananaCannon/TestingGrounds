@@ -51,6 +51,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void OnFire();
 
+	UFUNCTION(BlueprintCallable, Category = "Ammo")
+	void IncreaseAmmo(int32 AmmoToAdd);
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
