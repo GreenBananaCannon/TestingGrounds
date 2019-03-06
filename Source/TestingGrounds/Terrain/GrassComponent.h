@@ -14,9 +14,9 @@ public:
 	// Sets default values for this component's properties
 	UGrassComponent();
 
-	UPROPERTY(EditDefaultsOnly, Category = Spawning)
+	UPROPERTY(EditDefaultsOnly, Category = "Spawning")
 	FBox SpawningExtents;
-	UPROPERTY(EditDefaultsOnly, Category = Spawning)
+	UPROPERTY(EditDefaultsOnly, Category = "Spawning")
 	int SpawnCount;
 
 protected:
