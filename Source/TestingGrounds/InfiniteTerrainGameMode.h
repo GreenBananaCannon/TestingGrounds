@@ -24,6 +24,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Bounds Pool")
 	void PopulateBoundsVolumePool();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
+	int32 MinEnemies = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tile")
+	int32 MaxEnemies = 2;
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pool")
 	UActorPool* NavMeshBoundsVolumePool;
