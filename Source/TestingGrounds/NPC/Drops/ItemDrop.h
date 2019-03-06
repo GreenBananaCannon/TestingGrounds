@@ -18,6 +18,8 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Mesh")
 	class UStaticMeshComponent* ItemMesh;
 
+	float RunningTime;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
